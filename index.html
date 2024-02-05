@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #todo-container {
+      width: 300px;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #task-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .task input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    .task input[type="text"] {
+      flex: 1;
+      margin-right: 8px;
+      border: none;
+      padding: 8px;
+      border-radius: 4px;
+    }
+
+    .task button {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="todo-container">
+    <h2>My To-Do</h2>
+    <ul id="task-list"></ul>
+    <div>
+      <input type="text" id="new-task" placeholder="Add a new task">
+      <button onclick="addTask()">Add</button>
+    </div>
+  </div>
+
+  <script>
+    function addTask() {
+      const newTaskInput = document.getElementById('new-task');
+      const taskList = document.getElementById('task-list');
+
+      if (newTaskInput.value.trim() !== '') {
+        const taskItem = document.createElement('li');
+        taskItem.className = 'task';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        taskItem.appendChild(checkbox);
+
+        const taskText = document.createElement('input');
+        taskText.type = 'text';
+        taskText.value = newTaskInput.value;
+        taskItem.appendChild(taskText);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.onclick = function() {
+          taskList.removeChild(taskItem);
+        };
+        taskItem.appendChild(deleteButton);
+
+        taskList.appendChild(taskItem);
+        newTaskInput.value = ''; // Clear the input field
+      }
+    }
+  </script>
+</body>
+</html>
